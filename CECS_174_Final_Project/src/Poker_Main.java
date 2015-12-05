@@ -1,6 +1,8 @@
+/**
+ * This will be the main class of the poker game. 
+ */
+
 import java.util.*;
-
-
 public class Poker_Main {
 
 	public static void main(String[] args) {
