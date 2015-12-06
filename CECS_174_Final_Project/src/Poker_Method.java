@@ -57,8 +57,9 @@ import java.util.*;
 			deck[i]=t;
 		}
 		for(int i= 0; i<I;i++){
-			System.out.println(deck[i]);
+			System.out.println(deck[i]+", ");
 		}
+		return deck[i];
 		
 	}
 	public void Shuffling_Card(){
