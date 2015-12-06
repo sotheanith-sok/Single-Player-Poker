@@ -34,9 +34,34 @@ import java.util.*;
 	}
 	/****************************************************************************************************/
 	/**
-	 * 
+	 * This method is used to create and shuffle a deck of cards.
 	 */
-	
+	public void Creating_Deck(){
+		String[] suit= {"Clubs", "Diamonds", "Hearts", "Spades"};
+		String[] rank = {"2","3","4","5","6","7","8","9","10","Jack","Queen","King","Ace"};
+		
+		int Suits= suit.length;
+		int Ranks= rank.length;
+		int I= Suits*Ranks;
+		
+		String[] deck = new String[I];
+		for(int i=0; i<Ranks;i++){
+			for(int j=0;j<Suits;j++){
+				deck[Suits*i+j]= rank[i]+ " of "+ suit[j];
+			}
+		}
+		for(int i=0;i<I;i++){
+			int r= i+ (int)(Math.random()*(I-i));
+			String t= deck[r];
+			deck[r]= deck[i];
+			deck[i]=t;
+		}
+		for(int i= 0; i<I;i++){
+			System.out.println(deck[i]+", ");
+		}
+		return deck[i];
+		
+	}
 	public void Shuffling_Card(){
 		
 		
