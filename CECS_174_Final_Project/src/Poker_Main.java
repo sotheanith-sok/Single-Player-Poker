@@ -1,7 +1,4 @@
-/**Test if main branch update all the other branch
- * HelloWorld50000
- * asdfasdf
- * adfasdfffffffffffff
+/** 
  * This will be the main class of the poker game. 
  */
 
