@@ -36,7 +36,7 @@ import java.util.*;
 	/**
 	 * This method is used to create and shuffle a deck of cards.
 	 */
-	public void Creating_Deck(){
+	public String Creating_Deck(){
 		String[] suit= {"Clubs", "Diamonds", "Hearts", "Spades"};
 		String[] rank = {"2","3","4","5","6","7","8","9","10","Jack","Queen","King","Ace"};
 		
@@ -59,7 +59,7 @@ import java.util.*;
 		for(int i= 0; i<I;i++){
 			System.out.println(deck[i]+", ");
 		}
-		return deck[i];
+		return deck[I];
 		
 	}
 	public void Shuffling_Card(){
