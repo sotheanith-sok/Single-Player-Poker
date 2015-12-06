@@ -1,4 +1,4 @@
-/**Test if main branch update all the other branch
+/**
  * This will be the main class of the poker game. 
  */
 
