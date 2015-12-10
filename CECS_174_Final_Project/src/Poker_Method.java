@@ -67,6 +67,16 @@ import java.util.*;
 		
 	}
 	/****************************************************************************************************/
+	public static ArrayList<String> player_hand( ArrayList<String> deck )//deals 5 random cards to player.
+	{
+	  ArrayList<String> hand = new ArrayList<String>(5);
+	  Random rc = new Random();
+	  for ( int j = 0; j < 5; j++)
+	  {
+	      hand.add(deck.remove(rc.nextInt(deck.size())));
+	  }
+	   return hand;
+	}
 	
 	public void win_condition_1(){
 		
