@@ -112,6 +112,9 @@ import java.util.*;
 	return payout;	
 	}
 	/****************************************************************************************************/
+	/**
+	 * Call at the end to copy hand into discard pile and update hand.
+	 */
 	public void NextTurn(){
 
 		for (int i=0;i<5;i++){
