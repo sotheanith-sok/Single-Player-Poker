@@ -10,9 +10,10 @@ import java.util.*;
 	private ArrayList<String> deck_arraylist=new ArrayList<String>(); // The shuffled deck will store in here
 	private ArrayList<String> player_hand=new ArrayList<String>();// Cards that player has
 	private ArrayList<String> discard=new ArrayList<String>(); //Discarded card will save into here
+	private ArrayList <Integer> value=new ArrayList<Integer>();
 	double total=100;// The total of cash player has.
 	double payout= 0;
-        double bet;
+    double bet;
 	/****************************************************************************************************/
 	
 	/**This method is used to valid two input at the same time. It makes sure that player input the correct amount of money to bet for each play and the correct index for the card to remove from their hand.
@@ -106,11 +107,60 @@ import java.util.*;
 	
 	/****************************************************************************************************/
 	/**
-	 * This method should be the win condition. It will return payout and update balance.
+	 * This method will convert card into actual value.
 	 */
-	public double win_condition(){
+	public void  convertValue(){
+		for (int line=0;line<5;line++){
+			String sentence=player_hand.get(line);
+			int j=0;
+			String type=null;
+			String color=null;
+			for (int i=0;i<sentence.length();i++){
+				if (Character.isWhitespace(sentence.charAt(i))){
+					type=sentence.substring(0,i);
+					color=sentence.substring(i+4);
+				}
+			}
+			if (color.equals("Clubs")) //"Clubs", "Diamonds", "Hearts", "Spades"
+				j+=100;
+			if (color.equals("Diamonds"))
+				j+=200;
+			if (color.equals("Hearts"))
+				j+=300;
+			if (color.equals("Spades"))
+				j+=400;
+			if (type.equals("Aces"))
+				j+=1;
+			if (type.equals("2"))
+				j+=2;
+			if (type.equals("3"))
+				j+=3;
+			if (type.equals("4"))
+				j+=4;
+			if (type.equals("5"))
+				j+=5;
+			if (type.equals("6"))
+				j+=6;
+			if (type.equals("7"))
+				j+=7;
+			if (type.equals("8"))
+				j+=8;
+			if (type.equals("9"))
+				j+=9;
+			if (type.equals("10"))
+				j+=10;
+			if (type.equals("Jack"))
+				j+=11;
+			if (type.equals("Queen"))
+				j+=12;
+			if (type.equals("King"))
+				j+=13;
+			value.add(j);
+			
+			
+		}
 		
-	return payout;	
+	
 	}
 	/****************************************************************************************************/
 	/**
