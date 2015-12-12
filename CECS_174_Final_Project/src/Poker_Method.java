@@ -3,7 +3,6 @@
  * @author:
  *
  */
-
 import java.util.*;
 	public class Poker_Method {
 	/****************************************************************************************************/
@@ -12,6 +11,8 @@ import java.util.*;
 	private ArrayList<String> player_hand=new ArrayList<String>();// Cards that player has
 	private ArrayList<String> discard=new ArrayList<String>(); //Discarded card will save into here
 	double total=100;// The total of cash player has.
+	double payout= 0;
+        double bet;
 	/****************************************************************************************************/
 	
 	/**This method is used to valid two input at the same time. It makes sure that player input the correct amount of money to bet for each play and the correct index for the card to remove from their hand.
@@ -29,7 +30,7 @@ import java.util.*;
 		if (index>=0&&index<=4){
 			checker=true;
 		}
-
+		this.bet = bet;
 		return checker;
 	}
 	/****************************************************************************************************/
@@ -123,7 +124,150 @@ import java.util.*;
 			deck_arraylist.remove(0);
 		}
 	}
-	
+	/**
+     * 
+     */
+    public void pairs()
+    {
+        int occurence = 0;
+        ArrayList<String> holder = player_hand;
+        ArrayList<Integer> num = new ArrayList<Integer>();
+        for(int i = 0; i < holder.size(); i++)
+        {
+            for(int j = 0; j < holder.size(); j++)
+            {
+                if(j!=i)
+                {
+                    if(!player_hand.get(i).substring(0,2).equals("10") && player_hand.get(i).substring(0,1).equals(player_hand.get(j).substring(0,1)))
+                    {
+                        occurence++;
+                        holder.remove(j);
+                    }
+                    else if(player_hand.get(i).substring(0,2).equals("10") && player_hand.get(j).substring(0,2).equals("10"))
+                    {
+                        occurence++;
+                        holder.remove(j);
+                    }
+                }
+            }
+            if(occurence != 0)
+            {
+                num.add(occurence);
+                occurence=0;
+            }
+            holder.remove(i);
+        }
+        if(num.size()==0)//no pair
+        {
+            payout = 0;
+        }
+        else if(num.size()==1) // only one pair, three of a kind, or four of a kind
+        {
+            if(num.get(0)==1)//one pair
+            {
+                payout = bet * 0.01;
+            }
+            else if(num.get(0)==2)//three of a kind
+            {
+                payout = bet * 0.03;
+            }
+            else if(num.get(0) == 3) // four of a kind
+            {
+                payout = bet * 0.25;
+            }
+        }
+        else if(num.size() ==2)
+        {
+            if(num.get(0)==1 && num.get(1)==1) // two pairs
+            {
+                payout = bet * 0.02;
+            }
+            else if((num.get(0)==2 && num.get(1) ==1) || (num.get(0)==1 && num.get(1) ==2) )//full house
+            {
+                payout = bet * 0.06;
+            }
+        }
+    }
+    public void royalFlush()
+    {
+        ArrayList<String> holder = player_hand;
+        ArrayList<String> suitHolder = new ArrayList<String>();
+        String suitName = "";
+        int diamonds = 0;
+        int spades = 0;
+        int clubs = 0;
+        int hearts = 0;
+        boolean royal = false;
+        for(int i = 0; i < holder.size(); i++)
+        {
+            if(!holder.get(i).substring(0,2).equals("10") || !holder.get(i).substring(0,3).equals("Ace") || !holder.get(i).substring(0,4).equals("Jack") 
+                || !holder.get(i).substring(0,4).equals("King") || !holder.get(i).substring(0,5).equals("Queen"))
+            {
+                break;
+            }
+            else 
+            {
+                royal = true;
+                for(int j = 0; j < holder.get(i).length(); j++)
+                {
+                    if(holder.get(i).substring(j,j+1).equals("D"))
+                    {
+                        diamonds++;
+                    }
+                    else if(holder.get(i).substring(j,j+1).equals("S"))
+                    {
+                        spades++;
+                    }
+                    else if(holder.get(i).substring(j,j+1).equals("C"))
+                    {
+                        clubs++;
+                    }
+                    else
+                    {
+                        hearts++;
+                    }
+                }
+            }
+        }
+        if(royal && (diamonds == 5 || spades ==5 || clubs == 5|| hearts == 5))
+        {
+            payout = bet * 2.5;
+        }
+    }
+    public void flush()
+    {
+        ArrayList<String> holder = player_hand;
+        int diamonds = 0;
+        int spades = 0;
+        int clubs = 0;
+        int hearts = 0;
+        for(int i = 0; i < holder.size(); i++)
+        {
+            for(int j = 0; j < holder.get(i).length(); j++)
+            {
+                if(holder.get(i).substring(j,j+1).equals("D"))
+                    {
+                        diamonds++;
+                    }
+                    else if(holder.get(i).substring(j,j+1).equals("S"))
+                    {
+                        spades++;
+                    }
+                    else if(holder.get(i).substring(j,j+1).equals("C"))
+                    {
+                        clubs++;
+                    }
+                    else
+                    {
+                        hearts++;
+                    }
+            }
+        }
+        if(diamonds == 5 || spades ==5 || clubs == 5|| hearts == 5)
+        {
+            payout = bet * 0.05;
+        }
+    }
 	
 
 }
