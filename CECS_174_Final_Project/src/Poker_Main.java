@@ -74,9 +74,12 @@ public class Poker_Main {
 				method.updateHand(index);
 			}
 			method.printHand();
+			method.convertValue();
+			//Call all the win condition method. 
 			
-			//Win Condition
-			System.out.println("Payout:" +method.win_condition());
+			
+			//Display win amount and balance.
+			System.out.println("Payout:" +method.returnPayout());
 			System.out.println("Current balance: "+method.getBalance());
 			
 			//Ready for new turn
