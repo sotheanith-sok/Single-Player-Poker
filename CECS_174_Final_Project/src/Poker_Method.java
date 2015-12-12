@@ -164,6 +164,14 @@ import java.util.*;
 	}
 	/****************************************************************************************************/
 	/**
+	 * Retrun payout
+	 * @return 
+	 */
+	public double returnPayout(){
+		return payout;
+	}
+	/****************************************************************************************************/
+	/**
 	 * Call at the end to copy hand into discard pile and update hand.
 	 */
 	public void NextTurn(){
@@ -174,8 +182,9 @@ import java.util.*;
 			deck_arraylist.remove(0);
 		}
 	}
-	/**
-     * 
+	/****************************************************************************************************/
+     /**
+      *  
      */
     public void pairs()
     {
@@ -238,6 +247,9 @@ import java.util.*;
             }
         }
     }
+    /**
+     * 
+     */
     public void royalFlush()
     {
         ArrayList<String> holder = player_hand;
@@ -284,6 +296,9 @@ import java.util.*;
             payout = bet * 2.5;
         }
     }
+    /**
+     * 
+     */
     public void flush()
     {
         ArrayList<String> holder = player_hand;
