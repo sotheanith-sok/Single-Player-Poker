@@ -286,54 +286,73 @@ import java.util.*;
     		payout=bet*0.06;
     		
     }
+    
+    public void fourOfAKind()
+    {
+        Collections.sort(value);
+        ArrayList<Integer> temp = new ArrayList<>();
+        for(int i = 0; i < value.size(); i++)
+        {
+            temp.add(value.get(i)%100);
+        }
+        if(temp.get(0)==temp.get(1) && temp.get(1) == temp.get(2) && temp.get(2) == temp.get(3) && temp.get(3)== temp.get(4))
+        {
+            payout = bet * 0.25;
+        }
+        else if(temp.get(1)==temp.get(2) && temp.get(2) == temp.get(3) && temp.get(3) == temp.get(4) && temp.get(4)== temp.get(5))
+        {
+            payout = bet * 0.25;
+        }
+    }
+    
+    public void straightFlush()
+    {
+        Collections.sort(value);
+        ArrayList<Integer> temp1 = new ArrayList<Integer>();
+        ArrayList<Integer> temp2 = new ArrayList<Integer>();
+        for(int i = 0; i < value.size(); i++)
+        {
+            temp1.add(value.get(i)/100);
+            temp2.add(value.get(i)%100);
+        }
+        if(temp1.get(0)==temp1.get(1) && temp1.get(1) == temp1.get(2) && temp1.get(2) == temp1.get(3) && temp1.get(3)== temp1.get(4)&&temp1.get(4)==temp1.get(5)) // same suit
+        {
+            if(temp2.get(5)==temp2.get(4)+1 && temp2.get(4) == temp2.get(3)+1 && temp2.get(3) == temp2.get(2)+1 && temp2.get(2) == temp2.get(1)+1 && temp2.get(1) == temp2.get(0)+1)//consecutive from highest to lowest
+            {
+                payout = bet * 0.50;
+            }
+        }
+    }
+    
     /**
-     * 
+     *  //2 500  43 230
      */
     public void royalFlush()
     {
-        ArrayList<String> holder = player_hand;
-        ArrayList<String> suitHolder = new ArrayList<String>();
-        String suitName = "";
-        int diamonds = 0;
-        int spades = 0;
-        int clubs = 0;
-        int hearts = 0;
-        boolean royal = false;
-        for(int i = 0; i < holder.size(); i++)
+        convertValue();
+        Collections.sort(value);
+        boolean royals = false;
+        if(value.get(0) == 101 && value.get(1) == 110 && value.get(2) == 111 && value.get(3) == 112 && value.get(4)==113)
         {
-            if(!holder.get(i).substring(0,2).equals("10") || !holder.get(i).substring(0,3).equals("Ace") || !holder.get(i).substring(0,4).equals("Jack") 
-                || !holder.get(i).substring(0,4).equals("King") || !holder.get(i).substring(0,5).equals("Queen"))
-            {
-                break;
-            }
-            else 
-            {
-                royal = true;
-                for(int j = 0; j < holder.get(i).length(); j++)
-                {
-                    if(holder.get(i).substring(j,j+1).equals("D"))
-                    {
-                        diamonds++;
-                    }
-                    else if(holder.get(i).substring(j,j+1).equals("S"))
-                    {
-                        spades++;
-                    }
-                    else if(holder.get(i).substring(j,j+1).equals("C"))
-                    {
-                        clubs++;
-                    }
-                    else
-                    {
-                        hearts++;
-                    }
-                }
-            }
+            royals = true;
         }
-        if(royal && (diamonds == 5 || spades ==5 || clubs == 5|| hearts == 5))
+        else if(value.get(0) == 201 && value.get(1) == 210 && value.get(2) == 211 && value.get(3) == 212 && value.get(4)==213)
+        {
+            royals = true;
+        }
+        else if(value.get(0) == 301 && value.get(1) == 310 && value.get(2) == 311 && value.get(3) == 312 && value.get(4)==313)
+        {
+            royals = true;
+        }
+        else if(value.get(0) == 401 && value.get(1) == 410 && value.get(2) == 411 && value.get(3) == 412 && value.get(4)==413)
+        {
+            royals = true;
+        }
+        if(royals)
         {
             payout = bet * 2.5;
         }
+        value.clear();
     }
    
 	
