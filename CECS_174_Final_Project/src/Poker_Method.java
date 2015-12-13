@@ -286,6 +286,44 @@ import java.util.*;
     		payout=bet*0.06;
     		
     }
+    
+    public void fourOfAKind()
+    {
+        Collections.sort(value);
+        ArrayList<Integer> temp = new ArrayList<>();
+        for(int i = 0; i < value.size(); i++)
+        {
+            temp.add(value.get(i)%100);
+        }
+        if(temp.get(0)==temp.get(1) && temp.get(1) == temp.get(2) && temp.get(2) == temp.get(3) && temp.get(3)== temp.get(4))
+        {
+            payout = bet * 0.25;
+        }
+        else if(temp.get(1)==temp.get(2) && temp.get(2) == temp.get(3) && temp.get(3) == temp.get(4) && temp.get(4)== temp.get(5))
+        {
+            payout = bet * 0.25;
+        }
+    }
+    
+    public void straightFlush()
+    {
+        Collections.sort(value);
+        ArrayList<Integer> temp1 = new ArrayList<Integer>();
+        ArrayList<Integer> temp2 = new ArrayList<Integer>();
+        for(int i = 0; i < value.size(); i++)
+        {
+            temp1.add(value.get(i)/100);
+            temp2.add(value.get(i)%100);
+        }
+        if(temp1.get(0)==temp1.get(1) && temp1.get(1) == temp1.get(2) && temp1.get(2) == temp1.get(3) && temp1.get(3)== temp1.get(4)&&temp1.get(4)==temp1.get(5)) // same suit
+        {
+            if(temp2.get(5)==temp2.get(4)+1 && temp2.get(4) == temp2.get(3)+1 && temp2.get(3) == temp2.get(2)+1 && temp2.get(2) == temp2.get(1)+1 && temp2.get(1) == temp2.get(0)+1)//consecutive from highest to lowest
+            {
+                payout = bet * 0.50;
+            }
+        }
+    }
+    
     /**
      *  //2 500  43 230
      */
