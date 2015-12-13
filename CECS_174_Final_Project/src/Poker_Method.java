@@ -287,53 +287,34 @@ import java.util.*;
     		
     }
     /**
-     * 
+     *  //2 500  43 230
      */
     public void royalFlush()
     {
-        ArrayList<String> holder = player_hand;
-        ArrayList<String> suitHolder = new ArrayList<String>();
-        String suitName = "";
-        int diamonds = 0;
-        int spades = 0;
-        int clubs = 0;
-        int hearts = 0;
-        boolean royal = false;
-        for(int i = 0; i < holder.size(); i++)
+        convertValue();
+        Collections.sort(value);
+        boolean royals = false;
+        if(value.get(0) == 101 && value.get(1) == 110 && value.get(2) == 111 && value.get(3) == 112 && value.get(4)==113)
         {
-            if(!holder.get(i).substring(0,2).equals("10") || !holder.get(i).substring(0,3).equals("Ace") || !holder.get(i).substring(0,4).equals("Jack") 
-                || !holder.get(i).substring(0,4).equals("King") || !holder.get(i).substring(0,5).equals("Queen"))
-            {
-                break;
-            }
-            else 
-            {
-                royal = true;
-                for(int j = 0; j < holder.get(i).length(); j++)
-                {
-                    if(holder.get(i).substring(j,j+1).equals("D"))
-                    {
-                        diamonds++;
-                    }
-                    else if(holder.get(i).substring(j,j+1).equals("S"))
-                    {
-                        spades++;
-                    }
-                    else if(holder.get(i).substring(j,j+1).equals("C"))
-                    {
-                        clubs++;
-                    }
-                    else
-                    {
-                        hearts++;
-                    }
-                }
-            }
+            royals = true;
         }
-        if(royal && (diamonds == 5 || spades ==5 || clubs == 5|| hearts == 5))
+        else if(value.get(0) == 201 && value.get(1) == 210 && value.get(2) == 211 && value.get(3) == 212 && value.get(4)==213)
+        {
+            royals = true;
+        }
+        else if(value.get(0) == 301 && value.get(1) == 310 && value.get(2) == 311 && value.get(3) == 312 && value.get(4)==313)
+        {
+            royals = true;
+        }
+        else if(value.get(0) == 401 && value.get(1) == 410 && value.get(2) == 411 && value.get(3) == 412 && value.get(4)==413)
+        {
+            royals = true;
+        }
+        if(royals)
         {
             payout = bet * 2.5;
         }
+        value.clear();
     }
    
 	
