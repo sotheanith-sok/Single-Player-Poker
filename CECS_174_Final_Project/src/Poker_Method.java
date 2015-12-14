@@ -5,7 +5,6 @@
  */
 import java.util.*;
 	public class Poker_Method {
-	/****************************************************************************************************/
 	//Variable Control
 	private ArrayList<String> deck_arraylist=new ArrayList<String>(); // The shuffled deck will store in here
 	private ArrayList<String> player_hand=new ArrayList<String>();// Cards that player has
@@ -13,8 +12,7 @@ import java.util.*;
 	private ArrayList <Integer> value=new ArrayList<Integer>();
 	double total=100;// The total of cash player has.
 	double payout= 0;
-    double bet;
-	/****************************************************************************************************/
+    double bet=50;
 	
 	/**This method is used to valid two input at the same time. It makes sure that player input the correct amount of money to bet for each play and the correct index for the card to remove from their hand.
 	 * 
@@ -34,7 +32,7 @@ import java.util.*;
 		this.bet = bet;
 		return checker;
 	}
-	/****************************************************************************************************/
+
 	/**
 	 * This method is used to create and shuffle a deck of cards.
 	 */
@@ -61,7 +59,6 @@ import java.util.*;
 		for (int i=0;i<52;i++)
 			deck_arraylist.add(deck[i]);
 	}
-	/****************************************************************************************************/
 	/**
 	 * This method is used to randomize player hand at the beginning of the turn
 	 */
@@ -73,18 +70,18 @@ import java.util.*;
 	  for ( int j = 0; j < 5; j++)
 	      player_hand.add(deck_arraylist.remove(rc.nextInt(deck_arraylist.size())));
 	}
-	/****************************************************************************************************/
 	/**
-	 * 
+	 * This method is used to return the balance;
 	 * @return the player balance
 	 */
 	public double getBalance(){
+		total+=payout;
 		return total;
 	}
-	/****************************************************************************************************/
+	
 	/**
-	 * Print out the player hand
-	 */
+	 * This method is used to print player hand. 
+	 */	
 	public void printHand(){
 		System.out.println("|**********************************************************************************************|");
 		System.out.print("Your cards: (INDEX:CardType) ");
@@ -93,10 +90,9 @@ import java.util.*;
 		System.out.println();
 	}
 	
-	/****************************************************************************************************/
 	/**
 	 * This method used to update the player hand.
-	 * @param in is the index for the which to swap player_hand and deck
+	 * @param in is the index for the which to swap the card in player_hand and top cards of the deck.
 	 */
 	public void updateHand(ArrayList<Integer>index){
 		for (int i=0;i<index.size();i++){
@@ -105,9 +101,8 @@ import java.util.*;
 		deck_arraylist.remove(0);}
 	}
 	
-	/****************************************************************************************************/
 	/**
-	 * This method will convert card into actual value.
+	 * This method will convert cards into integer value.
 	 */
 	public void  convertValue(){
 		for (int line=0;line<5;line++){
@@ -119,6 +114,7 @@ import java.util.*;
 				if (Character.isWhitespace(sentence.charAt(i))){
 					type=sentence.substring(0,i);
 					color=sentence.substring(i+4);
+					break;
 				}
 			}
 			if (color.equals("Clubs")) //"Clubs", "Diamonds", "Hearts", "Spades"
@@ -162,38 +158,54 @@ import java.util.*;
 		
 	
 	}
-	/****************************************************************************************************/
+	
 	/**
-	 * Retrun payout
+	 * This method is used to return payout;
 	 * @return 
 	 */
 	public double returnPayout(){
 		return payout;
 	}
-	/****************************************************************************************************/
 	/**
-	 * Call at the end to copy hand into discard pile and update hand.
+	 * This method is called at the end of the turn in order to update player hand and make sure there is a card in the deck.
 	 */
 	public void NextTurn(){
-
+		payout=0;
+		//Update player hand
 		for (int i=0;i<5;i++){
 			discard.add(player_hand.get(i));
 			player_hand.set(i,deck_arraylist.get(0));
 			deck_arraylist.remove(0);
 		}
+		//Reshuffling the card when deck is low. 
+		if (deck_arraylist.size()<=5){
+			Collections.shuffle(discard);
+			for (int i=0;i<discard.size();i++)
+				deck_arraylist.add(discard.get(i));
+			discard.clear();
+		}
+		
 	}
-	/****************************************************************************************************/
-     /**
-      *  
-     */
+	/**
+	 * This method is used to get the current balance
+	 * @param balance
+	 */
+	public void innitialzing (double balance){
+		total=balance;		
+	}
+
+   /**
+    * This method is used to check for pairs.
+    */
     public void OneAndTwoPairs()
-    {	ArrayList<Integer>temp=new ArrayList<Integer>();
+    {  	ArrayList<Integer>temp=new ArrayList<Integer>();
     	int occurence=0;
     	for (int i=0;i<value.size();i++)
     	temp.add((value.get(i)%100));
     	Collections.sort(temp);
     	for (int i=0;i<temp.size()-1;){
     		//Pair is found
+    		
     		if (temp.get(i)==temp.get((i+1))){
     			occurence++;
     			i+=2;}
@@ -201,14 +213,16 @@ import java.util.*;
     		else
     			i+=1;
     	}
-    	if (occurence==1)
-    		payout=bet*0.01;
-    	if (occurence==2)
-    		payout=bet*0.02;
+    	if (occurence==1){
+    		payout=bet*1.01;
+    		System.out.println("One pair detected.");}
+    	if (occurence==2){
+    		payout=bet*1.02;
+    		System.out.println("Two pairs detected.");}
     		
     }
     /**
-     * 
+     * This method is used to check for three of a kind.
      */
     public void ThreeOfAKind(){
     	ArrayList<Integer>temp=new ArrayList<Integer>();
@@ -217,34 +231,37 @@ import java.util.*;
     	Collections.sort(temp);
     	//Compare three values at the same time
     	for (int i=0;i<temp.size()-2;i++){
-    		if ((temp.get(i)==temp.get(i+1))&&(temp.get(i+1)==temp.get(i+2)))
-    			payout=bet*0.03;
+    		if ((temp.get(i)==temp.get(i+1))&&(temp.get(i+1)==temp.get(i+2))){
+    			payout=bet*1.03;
+    			System.out.println("Three of a kind detected.");}
     	}
     		
     	
     }
     /**
-     * 
+     * This method is used to check for straight
      */
     public void Straight(){
     	ArrayList<Integer>temp=new ArrayList<Integer>();
-    	for (int i=0;i<value.size();i++)
-    	temp.add((value.get(i)%100));
+    	for (int i=0;i<value.size();i++){
+    		temp.add((value.get(i)%100));}
     	Collections.sort(temp);
     	int occurence=0;
-    	for (int i=0;i<temp.size()-1;i++){
-    		if (temp.get(i)==temp.get((i+1)))
-    				occurence++;
-    	}
-    	if (occurence==4)
-    		payout=bet*0.04;
-    	//Special case where straight is from 10 to Ace
-    	if (temp.get(0)==10&&temp.get(2)==11&&temp.get(3)==12&&temp.get(4)==13&&temp.get(5)==1)
-    		payout=bet*0.04;
     	
+    	for (int i=0;i<temp.size()-1;i++){
+    		if (temp.get(i)==temp.get(i+1)-1)
+    			occurence++;
+    	}
+    	if (occurence==4){
+    		payout=bet*1.04;
+    		System.out.println("Straight detected.");}
+    	//Special case where straight is from 10 to Ace
+    	if (temp.get(0)==10&&temp.get(2)==11&&temp.get(3)==12&&temp.get(4)==13&&temp.get(5)==1){
+    		payout=bet*1.04;
+    		System.out.println("Straight detected.");}
     }
     /**
-     * 
+     * This method is used to check for flush
      */
     public void flush(){
     	ArrayList<Integer>temp=new ArrayList<Integer>();
@@ -256,58 +273,60 @@ import java.util.*;
     		if (temp.get(i)==temp.get(i+1))
     			occurence++;
     	}
-    	if (occurence==4)
-    		payout=bet*0.05;    	
+    	if (occurence==4){
+    		payout=bet*1.05;    	
+    		System.out.println("Flush detected.");}
     }
     /**
-     * 
+     * This method is used to check for Fullhouse
      */
     public void FullHouse(){
+    	
     	ArrayList<Integer>temp=new ArrayList<Integer>();
     	for (int i=0;i<value.size();i++)
     	temp.add((value.get(i)%100));
     	Collections.sort(temp);
-    	int pair=0;
-    	int triple=0;
-    	for (int i=0;i<temp.size()-1;){
-    		if (temp.get(i)==temp.get(i+1)){
-    			if (temp.get(i+1)==temp.get(i+2)){
-    				triple++;
-    				i=i+3;}
-    			else{
-    				pair++;
-    				i=2;}
-    			
-    		}
-    		else
-    			break;
-    	}
-    	if (pair==1&&triple==1)
-    		payout=bet*0.06;
-    		
-    }
+    	boolean fullhouse=false;
     
+    	if (temp.get(0)==temp.get(1)&&temp.get(1)==temp.get(2)){
+    		if (temp.get(3)==temp.get(4))
+    			fullhouse=true;
+    		}
+    	if (temp.get(2)==temp.get(3)&&temp.get(3)==temp.get(4)){
+    		if (temp.get(0)==temp.get(1))
+    			fullhouse=true;
+    
+    		}
+    	if (fullhouse==true){
+    		System.out.println("FullHouse detected.");
+    		payout=bet*1.06;}
+    	
+    }
+    /**
+     * This method is used to check for Four of a Kind.
+     */
     public void fourOfAKind()
     {
-        Collections.sort(value);
         ArrayList<Integer> temp = new ArrayList<>();
         for(int i = 0; i < value.size(); i++)
         {
             temp.add(value.get(i)%100);
         }
-        if(temp.get(0)==temp.get(1) && temp.get(1) == temp.get(2) && temp.get(2) == temp.get(3) && temp.get(3)== temp.get(4))
-        {
-            payout = bet * 0.25;
+        Collections.sort(temp);
+        if(temp.get(0)==temp.get(1) && temp.get(1) == temp.get(2) && temp.get(2) == temp.get(3))
+        {	System.out.println("Four of a kind detected.");
+            payout = bet * 1.25;
         }
-        else if(temp.get(1)==temp.get(2) && temp.get(2) == temp.get(3) && temp.get(3) == temp.get(4) && temp.get(4)== temp.get(5))
-        {
-            payout = bet * 0.25;
+        else if(temp.get(1)==temp.get(2) && temp.get(2) == temp.get(3) && temp.get(3) == temp.get(4))
+        {	System.out.println("Four of a kind detected.");
+            payout = bet * 1.25;
         }
     }
-    
+    /**
+     * This method is used to check for Straight Flush
+     */
     public void straightFlush()
     {
-        Collections.sort(value);
         ArrayList<Integer> temp1 = new ArrayList<Integer>();
         ArrayList<Integer> temp2 = new ArrayList<Integer>();
         for(int i = 0; i < value.size(); i++)
@@ -315,46 +334,50 @@ import java.util.*;
             temp1.add(value.get(i)/100);
             temp2.add(value.get(i)%100);
         }
-        if(temp1.get(0)==temp1.get(1) && temp1.get(1) == temp1.get(2) && temp1.get(2) == temp1.get(3) && temp1.get(3)== temp1.get(4)&&temp1.get(4)==temp1.get(5)) // same suit
+        Collections.sort(temp1);
+        Collections.sort(temp2);
+        if((temp1.get(0)==temp1.get(1))&&(temp1.get(1)==temp1.get(2))&&(temp1.get(2)==temp1.get(3))&&(temp1.get(3)==temp1.get(4)))// same suit
         {
-            if(temp2.get(5)==temp2.get(4)+1 && temp2.get(4) == temp2.get(3)+1 && temp2.get(3) == temp2.get(2)+1 && temp2.get(2) == temp2.get(1)+1 && temp2.get(1) == temp2.get(0)+1)//consecutive from highest to lowest
-            {
-                payout = bet * 0.50;
+            if(temp2.get(0)==temp2.get(1)-1 && temp2.get(1) == temp2.get(2)-1 && temp2.get(2) == temp2.get(3)-1 && temp2.get(3) == temp2.get(4)-1)//consecutive from highest to lowest
+            {	System.out.println("Straight Flush detected.");
+                payout = bet * 1.50;
             }
         }
     }
     
     /**
-     *  //2 500  43 230
+     *  This method is used to check for Royal Flush.
      */
     public void royalFlush()
+    { 
+    	ArrayList<Integer> temp = new ArrayList<>();
+    for(int i = 0; i < value.size(); i++)
     {
-        convertValue();
-        Collections.sort(value);
+        temp.add(value.get(i));
+    }
+    Collections.sort(temp);
+        
         boolean royals = false;
-        if(value.get(0) == 101 && value.get(1) == 110 && value.get(2) == 111 && value.get(3) == 112 && value.get(4)==113)
+        if(temp.get(0) == 101 && temp.get(1) == 110 && temp.get(2) == 111 && temp.get(3) == 112 && temp.get(4)==113)
         {
             royals = true;
         }
-        else if(value.get(0) == 201 && value.get(1) == 210 && value.get(2) == 211 && value.get(3) == 212 && value.get(4)==213)
+        else if(temp.get(0) == 201 && temp.get(1) == 210 && temp.get(2) == 211 && temp.get(3) == 212 && temp.get(4)==213)
         {
             royals = true;
         }
-        else if(value.get(0) == 301 && value.get(1) == 310 && value.get(2) == 311 && value.get(3) == 312 && value.get(4)==313)
+        else if(temp.get(0) == 301 && temp.get(1) == 310 && temp.get(2) == 311 && temp.get(3) == 312 && temp.get(4)==313)
         {
             royals = true;
         }
-        else if(value.get(0) == 401 && value.get(1) == 410 && value.get(2) == 411 && value.get(3) == 412 && value.get(4)==413)
+        else if(temp.get(0) == 401 && temp.get(1) == 410 && temp.get(2) == 411 && temp.get(3) == 412 && temp.get(4)==413)
         {
             royals = true;
         }
         if(royals)
-        {
+        {	System.out.println("Royal Flush detected.");
             payout = bet * 2.5;
         }
-        value.clear();
     }
-   
-	
-
+    
 }
