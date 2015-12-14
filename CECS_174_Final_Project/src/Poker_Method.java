@@ -184,6 +184,7 @@ import java.util.*;
 				deck_arraylist.add(discard.get(i));
 			discard.clear();
 		}
+		value.clear();
 		
 	}
 	/**
@@ -215,10 +216,10 @@ import java.util.*;
     	}
     	if (occurence==1){
     		payout=bet*1.01;
-    		System.out.println("One pair detected.");}
+    		System.out.println("Result: One pair detected.");}
     	if (occurence==2){
     		payout=bet*1.02;
-    		System.out.println("Two pairs detected.");}
+    		System.out.println("Result: Two pairs detected.");}
     		
     }
     /**
@@ -233,7 +234,7 @@ import java.util.*;
     	for (int i=0;i<temp.size()-2;i++){
     		if ((temp.get(i)==temp.get(i+1))&&(temp.get(i+1)==temp.get(i+2))){
     			payout=bet*1.03;
-    			System.out.println("Three of a kind detected.");}
+    			System.out.println("Result: Three of a kind detected.");}
     	}
     		
     	
@@ -254,11 +255,11 @@ import java.util.*;
     	}
     	if (occurence==4){
     		payout=bet*1.04;
-    		System.out.println("Straight detected.");}
+    		System.out.println("Result: Straight detected.");}
     	//Special case where straight is from 10 to Ace
     	if (temp.get(0)==10&&temp.get(2)==11&&temp.get(3)==12&&temp.get(4)==13&&temp.get(5)==1){
     		payout=bet*1.04;
-    		System.out.println("Straight detected.");}
+    		System.out.println("Result: Straight detected.");}
     }
     /**
      * This method is used to check for flush
@@ -275,7 +276,7 @@ import java.util.*;
     	}
     	if (occurence==4){
     		payout=bet*1.05;    	
-    		System.out.println("Flush detected.");}
+    		System.out.println("Result: Flush detected.");}
     }
     /**
      * This method is used to check for Fullhouse
@@ -298,7 +299,7 @@ import java.util.*;
     
     		}
     	if (fullhouse==true){
-    		System.out.println("FullHouse detected.");
+    		System.out.println("Result: FullHouse detected.");
     		payout=bet*1.06;}
     	
     }
@@ -314,11 +315,11 @@ import java.util.*;
         }
         Collections.sort(temp);
         if(temp.get(0)==temp.get(1) && temp.get(1) == temp.get(2) && temp.get(2) == temp.get(3))
-        {	System.out.println("Four of a kind detected.");
+        {	System.out.println("Result: Four of a kind detected.");
             payout = bet * 1.25;
         }
         else if(temp.get(1)==temp.get(2) && temp.get(2) == temp.get(3) && temp.get(3) == temp.get(4))
-        {	System.out.println("Four of a kind detected.");
+        {	System.out.println("Result: Four of a kind detected.");
             payout = bet * 1.25;
         }
     }
@@ -339,7 +340,7 @@ import java.util.*;
         if((temp1.get(0)==temp1.get(1))&&(temp1.get(1)==temp1.get(2))&&(temp1.get(2)==temp1.get(3))&&(temp1.get(3)==temp1.get(4)))// same suit
         {
             if(temp2.get(0)==temp2.get(1)-1 && temp2.get(1) == temp2.get(2)-1 && temp2.get(2) == temp2.get(3)-1 && temp2.get(3) == temp2.get(4)-1)//consecutive from highest to lowest
-            {	System.out.println("Straight Flush detected.");
+            {	System.out.println("Result: Straight Flush detected.");
                 payout = bet * 1.50;
             }
         }
@@ -375,7 +376,7 @@ import java.util.*;
             royals = true;
         }
         if(royals)
-        {	System.out.println("Royal Flush detected.");
+        {	System.out.println("Result: Royal Flush detected.");
             payout = bet * 2.5;
         }
     }

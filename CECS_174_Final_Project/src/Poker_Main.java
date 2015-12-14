@@ -12,7 +12,7 @@ public class Poker_Main {
 		double payout; //The amount player payout
 		String Index;
 		boolean checker=false; //Check input
-		int count=0;
+		
 		ArrayList<Integer> index=new ArrayList<Integer>(); //This array will be used to save index chosen by player of the card to be remove. 
 		Scanner in=new Scanner(System.in);
 		Poker_Method method=new Poker_Method ();
@@ -72,15 +72,15 @@ public class Poker_Main {
 				}
 				
 			}
+			index.clear();
 			//Update hand. 
 			for (int i=0;i<index.size();i++){
 				method.updateHand(index);
 			}
-			
+			int count=0;
 			method.printHand();
 			method.convertValue();
 			//Call all the win condition method. 
-			System.out.print("Result: ");
 			if(method.returnPayout()==0){
 				count++;				
 				method.royalFlush();}
@@ -121,13 +121,20 @@ public class Poker_Main {
 		
 			//Ready for new turn
 			method.NextTurn();
+			if (method.getBalance()==0){
+				System.out.println("You run out of money!!");
+				System.out.println("Thank you for playing.");
+				System.exit(1);
+			}
 			System.out.println("Do you wish to continue? Y/N ");
 			String answer=in.next();
 			if (answer.equals("N")){
 				System.out.println("Final balance: $"+method.getBalance());
 				System.out.println("Thank you for playing.");
 				continues=false;
+				
 			}
+			
 		}
 	
 	}
