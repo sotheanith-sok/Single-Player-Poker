@@ -1,6 +1,7 @@
 /**This class will contain all the necessary  methods required by the class "Poker_Main."
  * 
- * @author:
+ * @author: Sotheanith Sok, Kunal Patel, Carlos Hurtado, Simon Lee
+ * 	
  *
  */
 import java.util.*;
@@ -23,7 +24,7 @@ import java.util.*;
    
 	public boolean input_validation (double bet1, int index){
 		boolean checker=false;
-		if (bet1>=1 &&bet1 <=total){
+		if (bet1>0 &&bet1 <=total){
 			checker=true;
 			total=total-bet1;
 		}
@@ -78,6 +79,8 @@ import java.util.*;
 	 */
 	public double getBalance(){
 		total+=payout;
+		total=Math.round(total*1000);
+		total=total/1000;
 		return total;
 	}
 	
@@ -166,6 +169,8 @@ import java.util.*;
 	 * @return 
 	 */
 	public double returnPayout(){
+		payout=Math.round(payout*1000);
+		payout=payout/1000;
 		return payout;
 	}
 	/**
