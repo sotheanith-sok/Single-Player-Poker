@@ -72,7 +72,6 @@ public class Poker_Main {
 				}
 				
 			}
-			index.clear();
 			//Update hand. 
 			for (int i=0;i<index.size();i++){
 				method.updateHand(index);
@@ -128,6 +127,7 @@ public class Poker_Main {
 			}
 			System.out.println("Do you wish to continue? Y/N ");
 			String answer=in.next();
+			index.clear();
 			if (answer.equals("N")){
 				System.out.println("Final balance: $"+method.getBalance());
 				System.out.println("Thank you for playing.");
