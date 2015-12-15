@@ -23,13 +23,13 @@ public class Poker_Main {
 		//Create deck 
 		method.Creating_Deck();
 		//Copy to player hand
-		method.player_hand();
+		//method.player_hand();
 		//Begin
 	
 		while (method.getBalance()>0&&continues==true){
-			
+			method.TEST();
 			//Bet validation
-			System.out.print("Please input your bet: ");
+			/*System.out.print("Please input your bet: ");
 			if (in.hasNextDouble()){
 				bet=in.nextDouble();
 				checker=method.input_validation(bet,-5);	
@@ -39,9 +39,9 @@ public class Poker_Main {
 				}
 			else{
 				System.out.println("Input Error.");
-				System.exit(1);	}
+				System.exit(1);	}*/
 			method.printHand();
-			
+		
 			//Index validation
 			System.out.println("Please input the index of cards that you do not want. (Ex: 1,2,3,4) ");
 			System.out.println("	Enter -None- if you do not wish to remove any card. ");

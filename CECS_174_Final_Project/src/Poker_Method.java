@@ -13,7 +13,7 @@ import java.util.*;
 	private ArrayList <Integer> value=new ArrayList<Integer>();
 	double total;// The total of cash player has.
 	double payout;
-    double bet;
+    double bet=500;
 	
 	/**This method is used to valid two input at the same time. It makes sure that player input the correct amount of money to bet for each play and the correct index for the card to remove from their hand.
 	 * 
@@ -21,7 +21,13 @@ import java.util.*;
 	 * @param index= the position of card for which to be remove. Since player has 5 cards, the index will go from 0 to 4;
 	 * @return if both inputs are valid, this method will return "true" else it will return "false."
 	 */
-   
+   public void TEST(){
+    	player_hand.add("Ace of Diamonds");
+    	player_hand.add("10 of Diamonds");
+    	player_hand.add("Jack of Diamonds");
+    	player_hand.add("Queen of Diamonds");
+    	player_hand.add("King of Diamonds");
+    }
 	public boolean input_validation (double bet1, int index){
 		boolean checker=false;
 		if (bet1>0 &&bet1 <=total){
@@ -130,7 +136,7 @@ import java.util.*;
 				j+=300;
 			if (color.equals("Spades"))
 				j+=400;
-			if (type.equals("Aces"))
+			if (type.equals("Ace"))
 				j+=1;
 			if (type.equals("2"))
 				j+=2;
