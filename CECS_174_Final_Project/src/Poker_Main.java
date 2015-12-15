@@ -16,7 +16,7 @@ public class Poker_Main {
 		Scanner in=new Scanner(System.in);
 		Poker_Method method=new Poker_Method ();
 		boolean continues=true;
-		System.out.println("Your innitial balance will be : $5000" );
+		System.out.println("Your innitial balance will bet : $5000" );
 		method.innitialzing(5000);
 		
 		
@@ -29,7 +29,7 @@ public class Poker_Main {
 		while (method.getBalance()>0&&continues==true){
 			
 			//Bet validation
-			System.out.print("Please input your be: ");
+			System.out.print("Please input your bet: ");
 			if (in.hasNextDouble()){
 				bet=in.nextDouble();
 				checker=method.input_validation(bet,-5);	
@@ -119,7 +119,7 @@ public class Poker_Main {
 		
 			//Ready for new turn
 			method.NextTurn();
-			if (method.getBalance()==0){
+			if (method.getBalance()<0.001){
 				System.out.println("You run out of money!!");
 				System.out.println("Thank you for playing.");
 				System.exit(1);
