@@ -16,7 +16,7 @@ public class Poker_Main {
 		Scanner in=new Scanner(System.in);
 		Poker_Method method=new Poker_Method ();
 		boolean continues=true;
-		System.out.println("Your innitial balance will bet : $5000" );
+		System.out.println("Your initial balance will bet : $5000" );
 		method.innitialzing(5000);
 		
 		
@@ -112,7 +112,7 @@ public class Poker_Main {
 			
 			//Display win amount and balance.
 			if (count==8&&method.returnPayout()==0)
-				System.out.println("No parttern dectected. You lost: $"+bet);
+				System.out.println("No pattern dectected. You lost: $"+bet);
 			else
 				System.out.println("Payout: $" +method.returnPayout());
 			System.out.println("Current balance: $"+method.getBalance());
