@@ -10,9 +10,9 @@ import java.util.*;
 	private ArrayList<String> player_hand=new ArrayList<String>();// Cards that player has
 	private ArrayList<String> discard=new ArrayList<String>(); //Discarded card will save into here
 	private ArrayList <Integer> value=new ArrayList<Integer>();
-	double total=100;// The total of cash player has.
-	double payout= 0;
-    double bet=50;
+	double total;// The total of cash player has.
+	double payout;
+    double bet;
 	
 	/**This method is used to valid two input at the same time. It makes sure that player input the correct amount of money to bet for each play and the correct index for the card to remove from their hand.
 	 * 
@@ -20,16 +20,18 @@ import java.util.*;
 	 * @param index= the position of card for which to be remove. Since player has 5 cards, the index will go from 0 to 4;
 	 * @return if both inputs are valid, this method will return "true" else it will return "false."
 	 */
-	public boolean input_validation (double bet, int index){
+   
+	public boolean input_validation (double bet1, int index){
 		boolean checker=false;
-		if (bet>=1 &&bet <=total){
+		if (bet1>=1 &&bet1 <=total){
 			checker=true;
-			total-=bet;
+			total=total-bet1;
 		}
 		if (index>=0&&index<=4){
 			checker=true;
 		}
-		this.bet = bet;
+		if(bet1!=-5000)
+		bet = bet1;
 		return checker;
 	}
 
