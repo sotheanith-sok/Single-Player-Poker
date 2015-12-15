@@ -306,7 +306,7 @@ import java.util.*;
     
     		}
     	if (fullhouse==true){
-    		System.out.println("Result: FullHouse detected.");
+    		System.out.println("Result: Full House detected.");
     		payout=bet*1.06;}
     	
     }
