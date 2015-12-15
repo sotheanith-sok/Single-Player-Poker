@@ -130,7 +130,7 @@ import java.util.*;
 				j+=300;
 			if (color.equals("Spades"))
 				j+=400;
-			if (type.equals("Aces"))
+			if (type.equals("Ace"))
 				j+=1;
 			if (type.equals("2"))
 				j+=2;
