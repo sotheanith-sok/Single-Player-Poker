@@ -9,7 +9,6 @@ public class Poker_Main {
 		// TODO Auto-generated method stub
 		//Variable control;
 		double bet=0; //The amount player bet
-		double payout; //The amount player payout
 		String Index;
 		boolean checker=false; //Check input
 		
@@ -26,7 +25,7 @@ public class Poker_Main {
 		//Copy to player hand
 		method.player_hand();
 		//Begin
-		
+	
 		while (method.getBalance()>0&&continues==true){
 			
 			//Bet validation
@@ -62,7 +61,7 @@ public class Poker_Main {
 						System.out.println("Input Error.");
 						System.exit(1);	}
 						
-					checker=method.input_validation(0,(Integer.parseInt(Index.substring(i,i+1)))-1);
+					checker=method.input_validation(-5000,(Integer.parseInt(Index.substring(i,i+1)))-1);
 					
 						if(checker==true){
 							index.add((Integer.parseInt(Index.substring(i,i+1)))-1);
@@ -72,7 +71,6 @@ public class Poker_Main {
 				}
 				
 			}
-			index.clear();
 			//Update hand. 
 			for (int i=0;i<index.size();i++){
 				method.updateHand(index);
@@ -128,6 +126,7 @@ public class Poker_Main {
 			}
 			System.out.println("Do you wish to continue? Y/N ");
 			String answer=in.next();
+			index.clear();
 			if (answer.equals("N")){
 				System.out.println("Final balance: $"+method.getBalance());
 				System.out.println("Thank you for playing.");
