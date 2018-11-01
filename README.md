@@ -1,2 +1,6 @@
-# A-single-player-poker
-This is a final project for CECS 174 which deals with a game of one player poker using java.
+# Name: A-single-player-poker
+# Class: CECS-174
+# School: CSULB
+# Description 
+A simple singleplayer game poker in a command line interface.
+
