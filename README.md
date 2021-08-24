@@ -1,12 +1,13 @@
-# Single Player Poker
-#### Description:
-```
-A simple singleplayer game poker in a command line interface.
-```
+<h1 align="center" style="border: none">Single Player Poker</h1>
 
-#### Course:
-```
-CECS-174 @CSULB
-```
+## Overview
+A simple single player game of poker in a command line interface.
 
+## Prerequisites
+ - [Java](https://www.oracle.com/java/technologies/javase-downloads.html)
 
+## Author
+ - [Sotheanith Sok](https://github.com/sotheanith)
+
+## Course
+ - [CECS 174 - Introduction to Programming and Problem Solving](http://catalog.csulb.edu/preview_course_nopop.php?catoid=5&coid=39968)
