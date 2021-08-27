@@ -8,6 +8,9 @@ A simple single player game of poker in a command line interface.
 
 ## Author
  - [Sotheanith Sok](https://github.com/sotheanith)
+ - [Kunal Edge](https://github.com/Kunaledge)
+ - [Carlos Hurtado](https://github.com/carloshurtadogil)
+ - [Simon Lee](https://github.com/simonxlee)
 
 ## Course
  - [CECS 174 - Introduction to Programming and Problem Solving](http://catalog.csulb.edu/preview_course_nopop.php?catoid=5&coid=39968)
