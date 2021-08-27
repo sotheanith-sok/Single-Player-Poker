@@ -6,7 +6,7 @@ A simple single player game of poker in a command line interface.
 ## Prerequisites
  - [Java](https://www.oracle.com/java/technologies/javase-downloads.html)
 
-## Author
+## Authors
  - [Sotheanith Sok](https://github.com/sotheanith)
  - [Kunal Edge](https://github.com/Kunaledge)
  - [Carlos Hurtado](https://github.com/carloshurtadogil)
